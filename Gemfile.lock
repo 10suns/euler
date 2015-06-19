@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    colorize (0.7.7)
+    commander (4.3.4)
+      highline (~> 1.7.2)
+    euler-manager (0.1.1)
+      colorize
+      commander
+      peach
+    highline (1.7.2)
+    peach (0.5.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  euler-manager
+
+BUNDLED WITH
+   1.10.4
