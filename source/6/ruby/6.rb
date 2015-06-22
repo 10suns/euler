@@ -1,0 +1,1 @@
+puts (1..100).reduce(:+)**2 - (1..100).inject{|sub, i| sub += i**2}
