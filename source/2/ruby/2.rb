@@ -1,7 +1,7 @@
 def fibonaccy_generator(limit_value)
   result = [1,2]
   while (result.last < limit_value)
-    result.push(result.drop(result.length-2).reduce(:+))
+    result.push(result.last(2).reduce(:+))
   end
   result
 end
