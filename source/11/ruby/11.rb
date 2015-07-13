@@ -19,56 +19,31 @@ flatten_grid = %w[08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48]
 
-@edge = 20
 grid = []
-0.upto(@edge-1) { |i| grid << flatten_grid[i*@edge, @edge] }
-
-def max_product_in_row(row)
-  max_product = 0
-  0.upto(row.length - 4) do |i|
-    product = row[i, 4].inject(1) {|product, e| product *= e.to_i}
-    max_product = product if max_product < product
-  end
-  max_product
+(0...20).each do |i|
+  grid << flatten_grid[i*20, 20].map{|char| char.to_i}
 end
 
-def max_product_in_array(array)
-  max_product = 0
-  array.each do |i|
-    max_product = max_product_in_row(i) if max_product < max_product_in_row(i)
-  end
-  max_product
-end
-
-def create_diagonal_array(square_array)
-  result_arr = []
-  0.upto(@edge - 1) do |i|
-    row, column = i, 0
-    tmp_arr = []
-    row.downto(0) do |i2|
-      tmp_arr << square_array[i2][column]
-      column += 1
+def largest_production_of(array)
+  max = 0
+  array.each do |row|
+    row.each_cons(4) do |n|
+      unless n.include?(0)
+        multi = n.reduce(:*)
+        max = multi if max < multi
+      end
     end
-    result_arr << tmp_arr
   end
-  
-  (@edge-1).downto(1) do |i|
-    row, column = i, @edge - 1
-    tmp_arr = []
-    row.upto(@edge-1) do |i2|
-      tmp_arr << square_array[i2][column]
-      column -=1
-    end
-    result_arr << tmp_arr
-  end
-  
-  return result_arr
+  max
 end
 
-products = []
-products << max_product_in_array(grid)
-products << max_product_in_array(grid.transpose)
-products << max_product_in_array(create_diagonal_array(grid))
-products << max_product_in_array(create_diagonal_array(grid.transpose))
+def diagonal_array_of(array)
 
-p products.max
+end
+
+arr_production = [
+  largest_production_of(grid),
+  largest_production_of(grid.transpose)
+]
+
+puts arr_production.max
