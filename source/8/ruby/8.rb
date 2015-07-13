@@ -20,9 +20,9 @@ number = %(73167176531330624919225119674426574742355349194934\
 71636269561882670428252483600823257530420752963450)
 
 max = 0
-(0..number.length-14).each do |i|
-  unless number.slice(i,13).include?('0')
-    multi = number.slice(i,13).split('').map{|char| char.to_i}.reduce(:*)
+number.chars.each_cons(13) do |i|
+  unless i.include?('0')
+    multi = i.map{|char| char.to_i}.reduce(:*)
     max = multi if max < multi
   end
 end
