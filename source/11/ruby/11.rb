@@ -39,9 +39,7 @@ class Array
 end
 
 grid = []
-(0...20).each do |i|
-  grid << flatten_grid[i*20, 20].map{|char| char.to_i}
-end
+flatten_grid.each_slice(20) {|i| grid << i.map {|char| char.to_i}}
 
 def largest_production_of(array)
   max = 0
