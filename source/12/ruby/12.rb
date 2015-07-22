@@ -1,18 +1,20 @@
-def factors_of(number)
-  result = []
-  (1..number).each do |i|
-    break if result.count(i) > 0
-    result += [i, number/i] if number%i == 0
+require 'prime'
+
+def number_factor_of(number)
+  prime_divisors = number.prime_division.inject([]) do |memo, current|
+    (1..current.last).each do
+      memo << current.first
+    end
+    memo
   end
-  result.sort
+  (1..prime_divisors.count).inject(1) do |count, n|
+    count += prime_divisors.combination(n).to_a.uniq.count
+  end
 end
 
-i = 0
-triangle_number = 0
-loop do
-  triangle_number += i
-  break if factors_of(triangle_number).count >= 5
-  i += 1
+triangle_numbers = [1]
+while number_factor_of(triangle_numbers.last) < 500
+  triangle_numbers << triangle_numbers.last + triangle_numbers.count + 1
 end
 
-p triangle_number
+puts triangle_numbers.last
