@@ -6,9 +6,7 @@ timestamp_interval = 24 * 7 * 3600
 current_date = start_date
 count = 0;
 while(current_date <= end_date) do
-    if (current_date.day == 1 && current_date.year > 1900)
-        count += 1
-    end
+    count += 1 if (current_date.day == 1 && current_date.year > 1900)
     current_date = current_date + timestamp_interval
 end
 
